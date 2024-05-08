@@ -1,6 +1,6 @@
 ﻿namespace BookLibraryAPIDemo.InfrastructureLayer.Models
 {
-    internal class Book : BaseModel
+    public class Book : BaseModel
     {
         public string Isbn { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace BookLibraryAPIDemo.InfrastructureLayer.Models
 {
-    internal class BaseModel 
+     public class BaseModel
     {
         [Key]
         public Guid Id { get; set; }
