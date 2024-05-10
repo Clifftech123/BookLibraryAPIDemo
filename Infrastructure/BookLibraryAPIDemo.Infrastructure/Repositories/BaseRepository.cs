@@ -1,4 +1,5 @@
-﻿using BookLibraryAPIDemo.Infrastructure.Context;
+﻿using BookLibraryAPIDemo.Application.Exceptions;
+using BookLibraryAPIDemo.Infrastructure.Context;
 using BookLibraryAPIDemo.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,7 +45,10 @@ namespace BookLibraryAPIDemo.Infrastructure.Repositories
 
         public async Task<List<T>> GetAllAsync() => await _context.Set<T>().AsNoTracking().ToListAsync();
 
-        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().AsNoTracking().FindAsync(id);
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
 
         public async Task<T> UpdateAsync(T entity)
         {
