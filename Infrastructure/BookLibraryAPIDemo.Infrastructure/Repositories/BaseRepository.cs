@@ -1,4 +1,4 @@
-﻿using BookLibraryAPIDemo.Application.Exceptions;
+﻿
 using BookLibraryAPIDemo.Infrastructure.Context;
 using BookLibraryAPIDemo.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;

@@ -2,7 +2,7 @@
 {
     public class PublisherNotFoundException : NotFoundException
     { 
-        public PublisherNotFoundException( Guid PublisherId) : base ($" Publisher with id : {PublisherId} is not found") {
+        public PublisherNotFoundException( int PublisherId) : base ($" Publisher with id : {PublisherId} is not found") {
         }
     }
 }

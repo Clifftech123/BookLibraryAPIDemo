@@ -1,11 +1,7 @@
 ﻿namespace BookLibraryAPIDemo.Application.Exceptions
 {
-    public class RepositoryException : Exception
+    public class RepositoryException(string message, Exception innerException) : Exception(message, innerException)
     {
-        public RepositoryException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
     }
 
 }

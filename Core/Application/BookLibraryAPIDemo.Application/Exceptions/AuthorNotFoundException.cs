@@ -3,7 +3,7 @@
     public class AuthorNotFoundException : NotFoundException
     {
 
-        public AuthorNotFoundException(Guid authorId) : base($"Author with  id :{authorId} is not found  ")
+        public AuthorNotFoundException(int authorId) : base($"Author with  id :{authorId} is not found  ")
         {
 
         }
