@@ -23,8 +23,8 @@ namespace BookLibraryAPIDemo.Application.Queries.Books
             public async Task<List<BookDTO>> Handle(GetAllBook request, CancellationToken cancellationToken)
             {
 
-                var gettAllBooks = await _repository.GetAllAsync();
-                var results = _mapper.Map<List<BookDTO>>(gettAllBooks);
+                var getAllBooks = await _repository.GetAllAsync();
+                var results = _mapper.Map<List<BookDTO>>(getAllBooks);
                 return results;
 
             }

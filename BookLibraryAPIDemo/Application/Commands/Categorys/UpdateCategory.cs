@@ -9,7 +9,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Categorys
 
     public class UpdateCategory : IRequest<CategoryDTO>
     {
-        public CategoryDTO Model { get; set; }
+        public CategoryDTO Category { get; set; }
     }
     public class UpdateCategoryHandler : IRequestHandler<UpdateCategory, CategoryDTO>
     {
@@ -24,9 +24,9 @@ namespace BookLibraryAPIDemo.Application.Commands.Categorys
 
         public async Task<CategoryDTO> Handle(UpdateCategory request, CancellationToken cancellationToken)
         {
-            var category = _mapper.Map<Category>(request.Model);
+            var category = _mapper.Map<Category>(request.Category);
             await _repository.UpdateAsync(category);
-            return request.Model!;
+            return request.Category!;
         }
     }
 }

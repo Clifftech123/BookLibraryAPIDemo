@@ -9,7 +9,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Authors
 
     public class UpdateAuthor : IRequest<AuthorDTO>
     {
-        public AuthorDTO Model { get; set; }
+        public AuthorDTO Author { get; set; }
     }
     public class UpdateAuthorHandler : IRequestHandler<UpdateAuthor, AuthorDTO>
     {
@@ -24,9 +24,9 @@ namespace BookLibraryAPIDemo.Application.Commands.Authors
 
         public async Task<AuthorDTO> Handle(UpdateAuthor request, CancellationToken cancellationToken)
         {
-            var author = _mapper.Map<Author>(request.Model);
+            var author = _mapper.Map<Author>(request.Author);
             await _repository.UpdateAsync(author);
-            return request.Model!;
+            return request.Author!;
         }
     }
 }

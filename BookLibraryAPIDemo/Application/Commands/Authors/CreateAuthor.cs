@@ -12,7 +12,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Authors
     public class CreateAuthor : IRequest<AuthorDTO>
 
     {
-        public AuthorDTO? author { get; set; }
+        public AuthorDTO? Author { get; set; }
 
 
         public class CreateAuthorHandler : IRequestHandler<CreateAuthor, AuthorDTO>
@@ -28,9 +28,9 @@ namespace BookLibraryAPIDemo.Application.Commands.Authors
 
             public async Task<AuthorDTO> Handle(CreateAuthor request, CancellationToken cancellationToken)
             {
-                var author = _mapper.Map<Author>(request.author);
+                var author = _mapper.Map<Author>(request.Author);
                 await _repository.CreateAsync(author);
-                return request.author;
+                return request.Author;
 
             }
         }
