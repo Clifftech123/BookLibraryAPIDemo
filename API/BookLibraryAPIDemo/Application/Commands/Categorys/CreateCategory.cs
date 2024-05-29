@@ -9,7 +9,7 @@ namespace BookLibraryAPIDemo.Application.Commands.BookLibraryAPICategory
 
     public class CreateCategory : IRequest<CategoryDTO>
     {
-        public CategoryDTO? Category { get; set; }
+        public CreateCategoryDTO Category { get; set; }
     }
 
     public class CreateCategoryHandler : IRequestHandler<CreateCategory, CategoryDTO>
@@ -26,7 +26,9 @@ namespace BookLibraryAPIDemo.Application.Commands.BookLibraryAPICategory
         {
             var category = _mapper.Map<Category>(request.Category);
             await _repository.CreateAsync(category);
-            return request.Category!;
+            return _mapper.Map<CategoryDTO>(category);
         }
     }
+
+
 }

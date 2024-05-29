@@ -11,7 +11,7 @@ namespace BookLibraryAPIDemo.API.Controllers
 
 
         [HttpPost("CreateBook")]
-        public async Task<IActionResult> CreateBookAsync([FromBody] BookDTO model)
+        public async Task<IActionResult> CreateBookAsync([FromBody] CreateBookDTO model)
         {
             return Ok(await Mediator.Send(new CreateBook { Book = model }));
         }

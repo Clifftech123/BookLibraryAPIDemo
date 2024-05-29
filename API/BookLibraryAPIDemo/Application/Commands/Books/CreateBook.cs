@@ -9,7 +9,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Books
     public class CreateBook : IRequest<BookDTO>
 
     {
-        public BookDTO? Book { get; set; }
+        public CreateBookDTO? Book { get; set; }
 
 
         public class CreateBookHandler : IRequestHandler<CreateBook, BookDTO>
@@ -27,7 +27,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Books
             {
                 var book = _mapper.Map<Book>(request.Book);
                 await _repository.CreateAsync(book);
-                return request.Book;
+                return _mapper.Map<BookDTO>(book);
 
             }
         }
@@ -36,3 +36,6 @@ namespace BookLibraryAPIDemo.Application.Commands.Books
 
 
 }
+
+
+

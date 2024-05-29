@@ -2,6 +2,7 @@
 using BookLibraryAPIDemo.Application.DTO;
 using BookLibraryAPIDemo.Domain.Entities;
 using BookLibraryAPIDemo.Infrastructure.Interfaces;
+using BookLibraryAPIDemo.Infrastructure.Repositories;
 using MediatR;
 
 namespace BookLibraryAPIDemo.Application.Queries.Books
@@ -22,12 +23,12 @@ namespace BookLibraryAPIDemo.Application.Queries.Books
 
             public async Task<List<BookDTO>> Handle(GetAllBook request, CancellationToken cancellationToken)
             {
-
-                var getAllBooks = await _repository.GetAllAsync();
+                var spec = new BookWithRelationsSpecification();
+                var getAllBooks = await _repository.GetAllBookAsync(spec);
                 var results = _mapper.Map<List<BookDTO>>(getAllBooks);
                 return results;
-
             }
+
         }
     }
 }

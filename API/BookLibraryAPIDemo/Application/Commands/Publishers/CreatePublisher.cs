@@ -8,7 +8,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Publishers
 {
     public class CreatePublisher : IRequest<PublisherDTO>
     {
-        public PublisherDTO? Publisher { get; set; }
+        public CreatePublisherDTO? Publisher { get; set; }
 
 
         public class CreatePublisherHandler : IRequestHandler<CreatePublisher, PublisherDTO>
@@ -25,7 +25,7 @@ namespace BookLibraryAPIDemo.Application.Commands.Publishers
             {
                 var publisher = _mapper.Map<Publisher>(request.Publisher);
                 await _repository.CreateAsync(publisher);
-                return request.Publisher!;
+                return _mapper.Map<PublisherDTO>(publisher);
             }
         }
     }

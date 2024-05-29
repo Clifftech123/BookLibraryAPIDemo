@@ -10,19 +10,31 @@ namespace BookLibraryAPIDemo.Application.Mapping
         public MappingProfile()
         {
             // Map from Book entity to BookDTO and back
-            CreateMap<Book, BookDTO>().ReverseMap();
+            CreateMap<Book, BookDTO>()
+   .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Name))
+   .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name))
+   .ForMember(dest => dest.Publisher, opt => opt.MapFrom(src => src.Publisher.PublisherName))
+   .ReverseMap();
 
-            // Map from Author entity to AuthorDTO and back
+            CreateMap<CreateBookDTO, Book>();
+
+
+
             CreateMap<Author, AuthorDTO>().ReverseMap();
-
-            // Map from CreateAuthorDTO to Author
             CreateMap<CreateAuthorDTO, Author>();
+            CreateMap<UpdateAuthorDTO, Author>();
 
-            // Map from Category entity to CategoryDTO and back
+
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<CreateCategoryDTO, Category>();
+            CreateMap<UpdateCategoryDTO, Category>();
 
-            // Map from Publisher entity to PublisherDTO and back
+
+
             CreateMap<Publisher, PublisherDTO>().ReverseMap();
+            CreateMap<CreatePublisherDTO, Publisher>();
+            CreateMap<UpdatePublisherDTO, Publisher>();
+
         }
     }
 

@@ -31,11 +31,11 @@ namespace BookLibraryAPIDemo.Controllers
         }
 
         [HttpPut("UpdateAuthor/{id}")]
-        public async Task<IActionResult> UpdateAuthorAsync([FromBody] AuthorDTO model)
+        public async Task<IActionResult> UpdateAuthorAsync([FromRoute] int id, [FromBody] UpdateAuthorDTO model)
         {
-            // Replace 'UpdateAuthor' with your actual command
-            return Ok(await Mediator.Send(new UpdateAuthor { Author = model }));
+            return Ok(await Mediator.Send(new UpdateAuthor { Id = id, Author = model }));
         }
+
 
         [HttpDelete("authors/{id}")]
         public async Task<IActionResult> DeleteAuthorAsync([FromRoute] int id)

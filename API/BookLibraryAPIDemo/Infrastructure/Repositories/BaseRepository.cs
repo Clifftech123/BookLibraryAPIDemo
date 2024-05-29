@@ -46,6 +46,30 @@ namespace BookLibraryAPIDemo.Infrastructure.Repositories
 
         public async Task<List<T>> GetAllAsync() => await _context.Set<T>().AsNoTracking().ToListAsync();
 
+        public async Task<List<T>> GetAllBookAsync(ISpecification<T> spec = null)
+        {
+
+            var query = _context.Set<T>().AsQueryable();
+
+            if (spec != null)
+            {
+                if (spec.Criteria != null)
+                {
+                    query = query.Where(spec.Criteria);
+                }
+
+                if (spec.Includes != null)
+                {
+                    foreach (var include in spec.Includes)
+                    {
+                        query = query.Include(include);
+                    }
+                }
+            }
+
+            return await query.ToListAsync();
+        }
+
         public async Task<T> GetByIdAsync(int id)
         {
             return await _context.Set<T>().FindAsync(id);

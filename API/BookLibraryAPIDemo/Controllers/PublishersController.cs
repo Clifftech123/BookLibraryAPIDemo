@@ -10,7 +10,7 @@ namespace BookLibraryAPIDemo.Controllers
     public class PublishersController : BaseApiController
     {
         [HttpPost("CreatePublisher")]
-        public async Task<IActionResult> CreatePublisherAsync([FromBody] PublisherDTO model)
+        public async Task<IActionResult> CreatePublisherAsync([FromBody] CreatePublisherDTO model)
         {
 
             return Ok(await Mediator.Send(new CreatePublisher { Publisher = model }));
@@ -30,12 +30,15 @@ namespace BookLibraryAPIDemo.Controllers
             return Ok(await Mediator.Send(new GetPublisherById() { PublisherId = id }));
         }
 
-        [HttpPut("UpdatePublisher")]
-        public async Task<IActionResult> UpdatePublisherAsync([FromBody] PublisherDTO model)
-        {
 
-            return Ok(await Mediator.Send(new UpdatePublisher { publisher = model }));
+        [HttpPut("UpdatePublisher/{id}")]
+        public async Task<IActionResult> UpdatePublisherAsync([FromRoute] int id, [FromBody] UpdatePublisherDTO model)
+        {
+            return Ok(await Mediator.Send(new UpdatePublisher { Id = id, Publisher = model }));
         }
+
+
+
 
         [HttpDelete("publishers/{id}")]
         public async Task<IActionResult> DeletePublisherAsync([FromRoute] int id)

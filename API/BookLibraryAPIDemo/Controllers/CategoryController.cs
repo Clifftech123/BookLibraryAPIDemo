@@ -10,11 +10,14 @@ namespace BookLibraryAPIDemo.Controllers
     // [Authorize]
     public class CategoryController : BaseApiController
     {
+
         [HttpPost("CreateCategory")]
-        public async Task<IActionResult> CreateCategoryAsync([FromBody] CategoryDTO model)
+        public async Task<IActionResult> CreateCategoryAsync([FromBody] CreateCategoryDTO model)
         {
             return Ok(await Mediator.Send(new CreateCategory { Category = model }));
         }
+
+
 
         [HttpGet("GetAllCategories")]
         public async Task<IActionResult> GetCategoriesAsync()
@@ -30,12 +33,13 @@ namespace BookLibraryAPIDemo.Controllers
             return Ok(await Mediator.Send(new GetCategoryById() { CategoryId = id }));
         }
 
-        [HttpPut("UpdateCategory")]
-        public async Task<IActionResult> UpdateCategoryAsync([FromBody] CategoryDTO model)
-        {
 
-            return Ok(await Mediator.Send(new UpdateCategory { Category = model }));
+        [HttpPut("UpdateCategory/{id}")]
+        public async Task<IActionResult> UpdateCategoryAsync([FromRoute] int id, [FromBody] UpdateCategoryDTO model)
+        {
+            return Ok(await Mediator.Send(new UpdateCategory { Id = id, Category = model }));
         }
+
 
         [HttpDelete("categories/{id}")]
         public async Task<IActionResult> DeleteCategoryAsync([FromRoute] int id)
