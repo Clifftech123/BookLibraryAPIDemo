@@ -44,7 +44,10 @@ namespace BookLibraryAPIDemo.Infrastructure.Repositories
             }
         }
 
-        public async Task<List<T>> GetAllAsync() => await _context.Set<T>().AsNoTracking().ToListAsync();
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().AsNoTracking().ToListAsync();
+        }
 
         public async Task<List<T>> GetAllBookAsync(ISpecification<T> spec = null)
         {

@@ -1,0 +1,31 @@
+﻿@page "/books"
+@inject HttpClient HttpClient
+
+<h3>Your Books</h3>
+
+@if (books == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    foreach (var book in books)
+    {
+        <p>@book.Title by @book.Author</p>
+    }
+}
+
+@code {
+    private Book[] books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        books = await HttpClient.GetFromJsonAsync<Book[]>("http://localhost:5052/GetAllBook");
+    }
+
+    public class Book
+    {
+        public string Title { get; set; }
+        public string Author { get; set; }
+    }
+}

@@ -26,9 +26,16 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddMediatR(m => m.RegisterServicesFromAssemblyContaining(typeof(CreateCategory)));
 builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
-builder.Services.ConfigureCors();
+builder.Services.ConfigureCors(builder.Configuration);
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
+
+// Add services to the container
+builder.Services.AddEndpointsApiExplorer();
+
+// Add NSwag services
+builder.Services.AddOpenApiDocument();
+
 
 // Add Swagger services
 builder.Services.AddSwaggerGen(c =>
@@ -45,6 +52,12 @@ app.ConfigureExceptionHandler(logger);
 if (app.Environment.IsProduction())
     app.UseHsts();
 
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
+
 app.UseHttpsRedirection();
 
 app.UseCors("CorsPolicy");
@@ -53,13 +66,12 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-
 app.UseSwagger();
 
 
 app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Book Library Demon API");
 });
 
 app.MapControllers();

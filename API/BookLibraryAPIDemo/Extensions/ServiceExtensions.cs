@@ -1,27 +1,35 @@
-﻿using BookLibraryAPIDemo.Infrastructure.Context;
+﻿using BookLibraryAPIDemo.Application.Exceptions;
+using BookLibraryAPIDemo.Application.Interfaces;
+using BookLibraryAPIDemo.Application.Models;
+using BookLibraryAPIDemo.Infrastructure.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using BookLibraryAPIDemo.Application.Interfaces;
-using BookLibraryAPIDemo.Application.Exceptions;
-using BookLibraryAPIDemo.Application.Models;
 
 namespace BookLibraryAPIDemo.API.Extensions
 {
     public static class ServiceExtensions
     {
 
-        public static void ConfigureCors(this IServiceCollection services)
-        {
-            services.AddCors(o =>
-            {
-                o.AddPolicy("CorsPolicy", c =>
-                c.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader());
 
-            });
+        public static void ConfigureCors(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddCors(
+                options => options.AddPolicy(
+                    "CorsPolicy",
+                    policy => policy.WithOrigins(
+                        configuration["BackendUrl"] ?? "https://localhost:5052",
+                        configuration["FrontendUrl"] ?? "https://localhost:7224")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                         .AllowCredentials()
+                    )
+                );
         }
+
+
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             var builder = services.AddIdentityCore<IdentityUser>(o =>

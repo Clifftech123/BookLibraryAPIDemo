@@ -1,0 +1,72 @@
+﻿@page "/books"
+@using static BookLibraryAPIDemo.Client.Models.BookModels
+@inject IConfiguration Config
+@inject HttpClient Http
+
+<PageTitle>  Get Books   </PageTitle>
+
+<h1> Get all Books from our System   </h1>
+
+@if (books == null)
+{
+    <p>No Books found.</p>
+}
+else
+{
+
+
+    <table class="table container table-bordered">
+        <thead>
+            <tr class="table-warning">
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">price</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col"> Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in books)
+            {
+                <tr class=" ">
+                    <td>@book.Title</td>
+                    <td class="author-column">@book.Author</td>
+                    <td>@book.Price</td>
+                    <td>@book.Publisher</td>
+                    <td>@book.Category</td>
+                    <td>@book.Description</td>
+                    <td>@book.CreatedDate.ToString("d")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+
+@code {
+    private string? serviceEndpoint;
+    private Book[]? books;
+
+    protected override async Task OnInitializedAsync()
+    {
+        serviceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/GetAllBook";
+        await GetBooks();
+    }
+
+    private async Task GetBooks()
+    {
+        try
+        {
+            books = await Http.GetFromJsonAsync<Book[]>(serviceEndpoint); 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+}
+

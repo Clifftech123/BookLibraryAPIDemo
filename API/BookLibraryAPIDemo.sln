@@ -3,12 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibraryAPIDemo", "BookLibraryAPIDemo\BookLibraryAPIDemo.csproj", "{29955D28-1BBA-4948-86EB-796A8BE6E03A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EF4BD97D-009D-49C1-B3CB-A2BFF8E17193}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibraryAPIDemo", "BookLibraryAPIDemo\BookLibraryAPIDemo.csproj", "{C91A2A92-A0B5-42C4-A72D-0B87128D98C2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{DCC1BF65-0B21-4A58-9333-0EC1B5B198D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{B73D9DE3-0DB0-4195-A43A-302CDC473F11}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookLibraryAPIDemo.Client", "..\Client\BookLibraryAPIDemo.Client\BookLibraryAPIDemo.Client\BookLibraryAPIDemo.Client.csproj", "{5601ABA3-5A43-4749-B244-C6E0A31A7F20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +22,21 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{29955D28-1BBA-4948-86EB-796A8BE6E03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29955D28-1BBA-4948-86EB-796A8BE6E03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29955D28-1BBA-4948-86EB-796A8BE6E03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29955D28-1BBA-4948-86EB-796A8BE6E03A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C91A2A92-A0B5-42C4-A72D-0B87128D98C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C91A2A92-A0B5-42C4-A72D-0B87128D98C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C91A2A92-A0B5-42C4-A72D-0B87128D98C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C91A2A92-A0B5-42C4-A72D-0B87128D98C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5601ABA3-5A43-4749-B244-C6E0A31A7F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5601ABA3-5A43-4749-B244-C6E0A31A7F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5601ABA3-5A43-4749-B244-C6E0A31A7F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5601ABA3-5A43-4749-B244-C6E0A31A7F20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C91A2A92-A0B5-42C4-A72D-0B87128D98C2} = {DCC1BF65-0B21-4A58-9333-0EC1B5B198D7}
+		{5601ABA3-5A43-4749-B244-C6E0A31A7F20} = {B73D9DE3-0DB0-4195-A43A-302CDC473F11}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {362173E8-E9D1-4498-8412-61AB47CDA487}
