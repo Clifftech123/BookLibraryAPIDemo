@@ -1,0 +1,67 @@
+﻿@page "/Category"
+@using BookLibraryAPIDemo.Client.Models
+@using static BookLibraryAPIDemo.Client.Models.BookModels
+@inject IConfiguration Config
+@inject HttpClient Http
+
+<PageTitle>  Get Category   </PageTitle>
+
+<h1> Get all Category from our System   </h1>
+
+@if (Categories == null)
+{
+    <p class=" text-danger">No Category found.</p>
+}
+else
+{
+
+
+    <table class="table container table-bordered">
+        <thead>
+            <tr class="table-warning">
+     
+                <th scope="col"> Name</th>
+                <th scope="col">Description</th>
+            
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Category in Categories)
+            {
+                <tr class=" ">
+                    <td>@Category.Name </td>
+                    <td>@Category.Description </td>
+                   
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+
+@code {
+    private string? serviceEndpoint;
+    private CategoryModels[]? Categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        serviceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/GetAllCategories";
+        await GetBooks();
+    }
+
+    private async Task GetBooks()
+    {
+        try
+        {
+            Categories = await Http.GetFromJsonAsync<CategoryModels[]>(serviceEndpoint);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+}
+

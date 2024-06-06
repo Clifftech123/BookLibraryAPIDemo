@@ -1,0 +1,60 @@
+﻿@page "/authors"
+@inject IConfiguration Config
+@inject HttpClient Http
+@using BookLibraryAPIDemo.Client.Models
+
+<PageTitle>  Get Authors  </PageTitle>
+
+<h1> Get All Authors from our System  </h1>
+
+@if (authors == null)
+{
+    <p class=" text-danger">No Books found.</p>
+}
+else
+{
+    <table class="table container table-bordered">
+        <thead>
+            <tr class="table-primary">
+                <th scope="col">Name</th>
+                <th scope="col"> Title</th>
+                <th scope="col">Email</th>
+                <th scope="col">bio</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in authors)
+            {
+                <tr class=" ">
+                    <td>@author.Title</td>
+                    <td class="author-column">@author.Name</td>
+                    <td>@author.Email</td>
+                    <td>@author.Bio</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private string? serviceEndpoint;
+    private Author[]? authors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        serviceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/GetAllAuthors";
+        await GetAuthors();
+    }
+
+    private async Task GetAuthors()
+    {
+        try
+        {
+            authors = await Http.GetFromJsonAsync<Author[]>(serviceEndpoint);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+}

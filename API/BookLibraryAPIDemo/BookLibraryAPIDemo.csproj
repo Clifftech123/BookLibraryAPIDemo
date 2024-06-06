@@ -27,8 +27,5 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Client\BookLibraryAPIDemo.Client\BookLibraryAPIDemo.Client\BookLibraryAPIDemo.Client.csproj" />
-  </ItemGroup>
 
 </Project>

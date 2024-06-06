@@ -1,0 +1,75 @@
+﻿@page "/publishers"
+
+@inject IConfiguration Config
+@inject HttpClient Http
+@using BookLibraryAPIDemo.Client.Models
+
+<PageTitle>  Get Publishers   </PageTitle>
+
+<h1> Get all Publishers from our System   </h1>
+
+@if (publisher == null)
+{
+    <p class=" text-danger">No Category found.</p>
+}
+else
+{
+
+
+    <table class="table container table-bordered">
+        <thead>
+            <tr class="table-success">
+
+                <th scope="col"> Name</th>
+                <th scope="col"> Address </th>
+                <th scope="col"> City </th>
+                <th scope="col"> Country </th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var publishers in publisher)
+            {
+                <tr class=" ">
+                    <td>@publishers.PublisherName</td>
+                    <td>@publishers.Address</td>
+                    <td>@publishers.City</td>
+                    <td>@publishers.Country</td>
+
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+
+@code {
+    private string? serviceEndpoint;
+    private PublisherModles[]? publisher;
+
+    protected override async Task OnInitializedAsync()
+    {
+        serviceEndpoint = $"{Config.GetValue<string>("BackendUrl")}/GetAllPublishers";
+        await GetBooks();
+    }
+
+    private async Task GetBooks()
+    {
+        try
+        {
+            publisher = await Http.GetFromJsonAsync<PublisherModles[]>(serviceEndpoint);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+}
+

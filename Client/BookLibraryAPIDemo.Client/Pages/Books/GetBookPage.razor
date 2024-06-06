@@ -9,7 +9,7 @@
 
 @if (books == null)
 {
-    <p>No Books found.</p>
+    <p class=" text-danger">No Books found.</p>
 }
 else
 {
@@ -17,7 +17,7 @@ else
 
     <table class="table container table-bordered">
         <thead>
-            <tr class="table-warning">
+            <tr class="table-info">
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">price</th>
@@ -25,6 +25,7 @@ else
                 <th scope="col">Category</th>
                 <th scope="col">Description</th>
                 <th scope="col"> Created Date</th>
+
             </tr>
         </thead>
         <tbody>
